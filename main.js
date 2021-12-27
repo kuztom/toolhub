@@ -37,7 +37,7 @@ function validate(jsonInput)
 
         if(!('type' in inputObject)) throw "There is no 'type' property in input";
 
-        if(!allowedTypeValues.includes(inputObject["type"])) throw "'type' must be 'FeatureCollection' or 'Feature'";
+        if(!allowedTypeValues.includes(inputObject["type"])) throw "'type' must match one of the values: " + allowedTypeValues.join(", ");
 
         //if(inputObject["type"] !== "FeatureCollection") throw 'Input does not have FeatureCollection!';
 
