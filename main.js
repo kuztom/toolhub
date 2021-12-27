@@ -28,6 +28,8 @@ function validate(jsonInput)
 {
     let alertPlaceholder = document.getElementById('alertPlaceholder');
 
+    const allowedTypeValues = ['FeatureCollection', 'Feature'];
+
     try{
         if(jsonInput === '') throw 'Input is empty!';
 
@@ -35,7 +37,9 @@ function validate(jsonInput)
 
         if(!('type' in inputObject)) throw "There is no 'type' property in input";
 
-        if(inputObject["type"] !== "FeatureCollection") throw 'Input does not have FeatureCollection!';
+        if(!allowedTypeValues.includes(inputObject["type"])) throw "'type' must be 'FeatureCollection' or 'Feature'";
+
+        //if(inputObject["type"] !== "FeatureCollection") throw 'Input does not have FeatureCollection!';
 
     } catch (err) {
         console.error('Invalid input');
