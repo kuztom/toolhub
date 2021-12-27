@@ -1,23 +1,22 @@
 let requestUrl = 'https://toolhub.kartes.lv/arcgis_api/to_arcgis';
 let form = document.getElementById('converter');
 //let inputData = document.getElementById('jsonInput').value;
-
+let data = '';
 
 form.addEventListener('submit', convert);
 
 function convert(e) {
     e.preventDefault();
-    let request = new XMLHttpRequest();
-    request.open("POST", requestUrl);
-    request.setRequestHeader("Content-Type", "application/json");
 
-    request.onreadystatechange = function () {
-        if (request.readyState === 4){
-            console.log(request.status);
-            console.log(request.responseText);
-        }
-    }
+    fetch(requestUrl, {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: document.getElementById('jsonInput').value
+    }).then(res => res.json())
+        .then(res => data = JSON.stringify(res));
 
-    request.send(document.getElementById('jsonInput').value);
-    document.getElementById('output').value = 'here goes converted data';
+    document.getElementById('output').innerText = data;
 }
