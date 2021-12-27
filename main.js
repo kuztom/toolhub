@@ -1,7 +1,5 @@
 let requestUrl = 'https://toolhub.kartes.lv/arcgis_api/to_arcgis';
 let form = document.getElementById('converter');
-//let inputData = document.getElementById('jsonInput').value;
-let data = '';
 
 form.addEventListener('submit', convert);
 
@@ -16,7 +14,8 @@ function convert(e) {
         },
         body: document.getElementById('jsonInput').value
     }).then(res => res.json())
-        .then(res => data = JSON.stringify(res));
-
-    document.getElementById('output').innerText = data;
+        .then(resData => {
+            document.getElementById('output').innerText = JSON.stringify(resData);
+            console.log(resData);
+        });
 }
